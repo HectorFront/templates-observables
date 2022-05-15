@@ -11,12 +11,12 @@ export class Observable {
 
     /**
      *
-     * @param id
-     * @param fn
+     * @param idListener
+     * @param fnListener
      */
-    subscribe(id, fn) {
+    subscribe(idListener, fnListener) {
         console.log(`[~Subscribe] => ${id}`);
-        this._listeners.push({id, fn});
+        this._listeners.push({idListener, fnListener});
     }
 
     /**
@@ -31,21 +31,21 @@ export class Observable {
     /**
      *
      *
-     * @param id
+     * @param idListener
      */
-    unsubscribe(id) {
-        console.log(`[~Clear] => Observer: ${id}`);
-        this._listeners = this._listeners.filter(listener => listener.id !== id);
+    unsubscribe(idListener) {
+        console.log(`[~Clear] => Observer: ${idListener}`);
+        this._listeners = this._listeners.filter(listener => listener.id !== idListener);
     }
 
     /**
      *
-     * @param id
+     * @param idEvent
      * @param data
      */
-    notify(id, data) {
+    notify(idEvent, data) {
         this._listeners.forEach(listener => {
-            if(listener.id === id) {
+            if(listener.id === idEvent) {
                 return listener.fn(data);
             }
         });
